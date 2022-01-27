@@ -1,7 +1,7 @@
 export default {
   inject: {
     formData: {
-      default: () => ({}),
+      default: {},
     }
   },
   methods: {

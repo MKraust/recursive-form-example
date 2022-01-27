@@ -2,6 +2,7 @@
   <div>
     <input
       :value="value"
+      :placeholder="title"
       @input="handleInput(name, $event.target.value)"
     />
   </div>
@@ -17,9 +18,14 @@ export default {
       type: String,
       required: true,
     },
-    value: {
+    title: {
       type: String,
-      default: '',
+      required: true,
+    },
+  },
+  computed: {
+    value() {
+      return this.formData[this.name]
     },
   },
 }

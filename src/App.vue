@@ -6,7 +6,6 @@
         :is="getFieldComponent(field.type)"
         :key="field.key"
         v-bind="field"
-        :value="getFieldValue(field.name)"
         @input="setFieldValue"
       />
     </template>
@@ -26,14 +25,11 @@ export default {
   },
   provide() {
     return {
-      formData: () => this.formData,
+      formData: this.formData,
     }
   },
   methods: {
     getFieldComponent,
-    getFieldValue(name) {
-      return this.formData[name]
-    },
     setFieldValue(name, val) {
       this.$set(this.formData, name, val)
     }

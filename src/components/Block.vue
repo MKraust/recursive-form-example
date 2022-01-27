@@ -5,7 +5,6 @@
       :key="field.key"
       :is="getFieldComponent(field.type)"
       v-bind="field"
-      :value="formData[field.name]"
       @input="handleInput"
     />
   </div>

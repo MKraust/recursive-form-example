@@ -1,9 +1,14 @@
 import String from '@/components/String';
+import Block from '@/components/Block';
 
 export const getFieldComponent = (type) => {
-  if (type === 'string' || type === 'integer') {
-    return String
+  const map = {
+    string: String,
+    integer: String,
+    block: Block,
   }
 
-  return null
+  console.log(type, map[type])
+
+  return map[type] || null
 }
