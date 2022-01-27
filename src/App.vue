@@ -1,28 +1,42 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <template v-for="field in fields">
+      <component
+        v-if="getFieldComponent(field.type)"
+        :is="getFieldComponent(field.type)"
+        :key="field.key"
+        v-bind="field"
+        :value="getFieldValue(field.name)"
+        @input="setFieldValue"
+      />
+    </template>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import FIELDS from './fields'
+import { getFieldComponent } from '@/comp';
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      fields: FIELDS[0].fields,
+      formData: {},
+    };
+  },
+  provide() {
+    return {
+      formData: () => this.formData,
+    }
+  },
+  methods: {
+    getFieldComponent,
+    getFieldValue(name) {
+      return this.formData[name]
+    },
+    setFieldValue(name, val) {
+      this.$set(this.formData, name, val)
+    }
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
